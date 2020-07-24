@@ -1,33 +1,58 @@
 package third.task;
 
 public class Buyer extends Thread{
-    private volatile int products = 0;
-    private volatile static boolean isStoped = false;
-    public volatile int ccc = 0;
-
-    Store store;
+    private int products = 0;
+    private int operations = 0;
+    private final Store store;
+    private static int buyers = 0;
+    private static int avarageOp = 0;
 
     public Buyer(Store store) {
         this.store = store;
+        buyers++;
     }
 
-    public synchronized void addProducts(int count){
+    public void addProducts(int count){
         products += count;
     }
 
-    public synchronized int getProducts() {
+    public int getProducts() {
         return products;
+    }
+
+    public int getOperations() {
+        return operations;
     }
 
     public static int getRandomCount() {
         return (int) (Math.random() * 10) + 1;
     }
 
+    /*@Override
+    public void run() {
+        while (store.getProducts() > 0) {
+            int a = 0;
+            synchronized (store) {
+                if (store.getProducts() > 0 && operations <= getAvarageOp() / buyers) {
+                    a = store.takeProducts(getRandomCount());
+                    operations++;
+                    avarageOp++;
+                }
+            }
+            addProducts(a);
+        }
+    }*/
+
     @Override
     public void run() {
-        while (Store.products > 0){
-            addProducts(store.takeProducts(getRandomCount()));
-            ccc++;
+        while (store.getProducts() > 0) {
+            synchronized (store) {
+                if (store.getProducts() > 0 && operations <= avarageOp / buyers) {
+                    addProducts(store.takeProducts(getRandomCount()));
+                    operations++;
+                    avarageOp++;
+                }
+            }
         }
     }
 }

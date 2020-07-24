@@ -14,19 +14,17 @@ public class ThirdTask {
             list.add(buyer);
             buyer.start();
         }
-        System.out.println(Buyer.getRandomCount());
 
-        while (Store.products > 0){ }
+        while (store.getProducts() > 0) {}
 
         for (Buyer b : list){
             b.interrupt();
-            //b.stop();
         }
 
         int a = 0;
         for (Buyer b : list){
             a += b.getProducts();
-            System.out.println(b.getProducts() + " | count = " + b.ccc);
+            System.out.println(b.getProducts() + " | count = " + b.getOperations());
         }
         System.out.println(a);
     }
