@@ -1,9 +1,9 @@
 package third.task;
 
 public class Store {
-    private int products = 1000;
+    private static int products = 1000;
 
-    public int takeProducts(int count){
+    public static int takeProducts(int count){
         products -= count;
         if (products < 0) {
             count += products;
@@ -11,7 +11,7 @@ public class Store {
         return count;
     }
 
-    public synchronized int getProducts() {
+    public static synchronized int getProducts() {
         return products;
     }
 }
