@@ -10,7 +10,7 @@ public class Buyer extends Thread{
         buyers++;
     }
 
-    public void addProducts(int count){
+    private void addProducts(int count){
         products += count;
     }
 
@@ -22,7 +22,7 @@ public class Buyer extends Thread{
         return operations;
     }
 
-    public static int getRandomCount() {
+    private static int getRandomCount() {
         return (int) (Math.random() * 10) + 1;
     }
 

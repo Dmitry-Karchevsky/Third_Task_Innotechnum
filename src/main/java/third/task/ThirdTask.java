@@ -14,10 +14,12 @@ public class ThirdTask {
             buyer.start();
         }
 
-        while (Store.getProducts() > 0) {}
-
         for (Buyer b : list){
-            b.interrupt();
+            try {
+                b.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         int sum = 0;
