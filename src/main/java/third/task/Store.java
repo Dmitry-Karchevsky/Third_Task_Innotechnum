@@ -1,7 +1,7 @@
 package third.task;
 
 public class Store {
-    private static volatile int products = 100;
+    private static int products = 1000;
 
     public static synchronized int takeProducts(int count){
         if (count > products){
@@ -10,12 +10,6 @@ public class Store {
         }
         else
             products -= count;
-        //System.out.println(Thread.currentThread().getName());
-        //System.out.println(products);
         return count;
-    }
-
-    public static int getProducts() {
-        return products;
     }
 }
