@@ -7,6 +7,7 @@ public class ThirdTask {
     public static void main(String[] args) {
         int peoples = Integer.parseInt(args[0]);
         List<Buyer> list = new ArrayList<>();
+        Buyer.setCyclicBarrier(peoples);
 
         for (int i = 0; i < peoples; i++) {
             Buyer buyer = new Buyer();
@@ -22,11 +23,14 @@ public class ThirdTask {
             }
         }
 
-        int sum = 0;
+        int sumProducts = 0;
+        int sumOperations = 0;
         for (Buyer b : list){
-            sum += b.getProducts();
-            System.out.println(b.getProducts() + " | count = " + b.getOperations());
+            sumProducts += b.getProducts();
+            sumOperations += b.getOperations();
+            System.out.println(b.getName() + " " + b.getProducts() + " | count = " + b.getOperations());
         }
-        System.out.println(sum);
+        System.out.println("sumProducts = " + sumProducts + " | sumOperations = " + sumOperations);
+        System.out.println("проходы потоков в цикле = " + Buyer.count);
     }
 }
