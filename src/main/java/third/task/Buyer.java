@@ -43,15 +43,14 @@ public class Buyer extends Thread{
         } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
-        while (Store.getProducts() > 0) {
+
+        for (int a = Store.takeProducts(getRandomCount()); a != 0; a = Store.takeProducts(getRandomCount())){
             count++;
             try {
                 // Покупатели ждут когда один не возьмет определенное количесство товаров и не встанет в конец очереди
                 semaphore.acquire();
-                if (Store.getProducts() > 0) { // нужно что бы не добавлять нули
-                    addProducts(Store.takeProducts(getRandomCount()));
-                    operations++;
-                }
+                addProducts(a);
+                operations++;
                 semaphore.release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
