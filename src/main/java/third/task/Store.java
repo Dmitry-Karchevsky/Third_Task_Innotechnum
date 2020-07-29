@@ -7,9 +7,12 @@ public class Store {
         if (count > products){
             count = products;
             products = 0;
-        }
-        else
+        } else
             products -= count;
         return count;
+    }
+
+    public static int getProducts(){
+        return products;
     }
 }
